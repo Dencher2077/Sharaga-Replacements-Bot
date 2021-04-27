@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharagaReplacementsBot", "SharagaReplacementsBot\SharagaReplacementsBot.csproj", "{5F159B1E-B876-4413-83C2-DE9FE54FE9BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F159B1E-B876-4413-83C2-DE9FE54FE9BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F159B1E-B876-4413-83C2-DE9FE54FE9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F159B1E-B876-4413-83C2-DE9FE54FE9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F159B1E-B876-4413-83C2-DE9FE54FE9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
