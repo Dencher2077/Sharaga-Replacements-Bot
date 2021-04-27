@@ -21,16 +21,12 @@ namespace SharagaReplacementsBot
             IElement replacementsTable = document.QuerySelectorAll("table tbody").ToArray()[^1];
             
             StringBuilder result = new StringBuilder();
-            
             foreach (var row in replacementsTable.Children.Skip(1))
             {
                 for (int i = 0; i < row.Children.Length; i++)
                 {
                     string cellContent = row.Children[i].InnerHtml;
-                    if(row.Children.Length > 1) 
-                        result.Append(FormatCell(i, cellContent) + "\n");
-                    else
-                        result.Append(cellContent + "\n");
+                    result.Append(row.Children.Length > 1 ? FormatCell(i, cellContent) : cellContent + "\n");
                 }
                 
                 result.Append("\n");
@@ -49,12 +45,11 @@ namespace SharagaReplacementsBot
         //Форматирует ячейки в зависимости от их положения в строке2
         public static string FormatCell(int cellNumber, String cellContent) => cellNumber switch
         {
-            0 => $"{cellContent}",
-            1 => $"Номер пары: {cellContent}",
-            2 => $"Пара: {cellContent}",
-            3 => $"Препод: {cellContent}",
-            4 => $"Кабинет: {cellContent}",
-            _ => cellContent
+            1 => $"Номер пары: {cellContent} \n",
+            2 => $"Пара: {cellContent} \n",
+            3 => $"Препод: {cellContent} \n",
+            4 => $"Кабинет: {cellContent} \n",
+            _ => ""
         };
 
 
