@@ -18,7 +18,11 @@ namespace SharagaReplacementsBot
         public static async Task<string> GetReplacementsString(string url)
         {
             var document = new HtmlParser().ParseDocument(await GetHtml(url));
-            IElement replacementsTable = document.QuerySelectorAll("table tbody").ToArray()[^1];
+            IElement[] tables = document.QuerySelectorAll("table tbody").ToArray();
+
+            if (tables.Length < 2) return "Замен нема";
+                
+            IElement replacementsTable = tables[^1];
             
             StringBuilder result = new StringBuilder();
             foreach (var row in replacementsTable.Children.Skip(1))

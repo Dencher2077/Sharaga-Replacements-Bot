@@ -25,9 +25,6 @@ namespace SharagaReplacementsBot
             var msg = e.Message;
 
             Console.WriteLine($"Message: {msg.Text}");
-
-            Console.WriteLine(Environment.GetEnvironmentVariable("HOME"));
-            ;
             
             if(msg.Text == "/start")
                 await Client.SendTextMessageAsync(msg.Chat.Id, "Здарова ёпта", replyMarkup: GetButtons());
