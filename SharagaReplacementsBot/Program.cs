@@ -29,7 +29,7 @@ namespace SharagaReplacementsBot
             if(msg.Text == "/start")
                 await Client.SendTextMessageAsync(msg.Chat.Id, "Здарова ёпта", replyMarkup: GetButtons());
             
-            if (msg.Text == "/reps")
+            if (msg.Text is "/reps" or "Замены")
             {
                 try
                 {
@@ -49,7 +49,7 @@ namespace SharagaReplacementsBot
             {
                 Keyboard = new List<List<KeyboardButton>>
                 {
-                    new() {new KeyboardButton { Text = "Замены" }}
+                    new() {new KeyboardButton { Text = "Замены",  }}
                 }
             };
         }
