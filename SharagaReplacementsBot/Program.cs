@@ -29,7 +29,7 @@ namespace SharagaReplacementsBot
             if(msg.Text == "/start")
                 await Client.SendTextMessageAsync(msg.Chat.Id, "Здарова ёпта", replyMarkup: GetButtons());
             
-            if (msg.Text is "/reps" or "Замены")
+            if (msg.Text.ToLower() is "/reps" or "замены")
             {
                 try
                 {
@@ -41,6 +41,14 @@ namespace SharagaReplacementsBot
                     Console.WriteLine(ex);
                 }
             }
+
+            if (msg.Text.ToLower() is "/week_type" or "тип недели")
+            {
+                int x = (new DateTime(2021, 3, 26) - new DateTime()).Days / 7;
+                string result = x % 2 == 0 ? "Числитель" : "Знаменатель";
+                await Client.SendTextMessageAsync(msg.Chat.Id, result);
+            }
+                
         }
 
         private static ReplyKeyboardMarkup GetButtons()
@@ -49,7 +57,11 @@ namespace SharagaReplacementsBot
             {
                 Keyboard = new List<List<KeyboardButton>>
                 {
-                    new() {new KeyboardButton { Text = "Замены",  }}
+                    new()
+                    {
+                        new KeyboardButton { Text = "Замены" },
+                        new KeyboardButton { Text = "Тип недели" },
+                    }
                 }
             };
         }
