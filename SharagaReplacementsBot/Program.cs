@@ -29,7 +29,7 @@ namespace SharagaReplacementsBot
             if(msg.Text == "/start")
                 await Client.SendTextMessageAsync(msg.Chat.Id, "Здарова ёпта", replyMarkup: GetButtons());
             
-            if (msg.Text == "Замены")
+            if (msg.Text == "/reps")
             {
                 try
                 {
