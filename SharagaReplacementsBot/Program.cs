@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -23,36 +24,36 @@ namespace SharagaReplacementsBot
         private static async void OnMessage(object sender, MessageEventArgs e)
         {
             var msg = e.Message;
+            if (msg.Text == null) return;
+            
             Console.WriteLine($"Message: {msg.Text}");
+
+            try
+            {
+                if (msg.Text.ToLower() is "/reps" or "/reps@sharaga_replacements_bot")
+                    await SendReplacements(msg.Chat.Id);
             
-            if(msg.Text == "/start")
-                await Client.SendTextMessageAsync(msg.Chat.Id, "Здарова ёпта", replyMarkup: GetButtons());
+                if (msg.Text.ToLower() is "/week_type" or "/week_type@sharaga_replacements_bot")
+                    await SendWeekType(msg.Chat.Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
             
-            if (msg.Text.ToLower() is "/reps" or "замены")
-                SendReplacements(msg.Chat.Id);
-            
-            if (msg.Text.ToLower() is "/week_type" or "тип недели")
-                SendWeekType(msg.Chat.Id);
         }
 
-        private static async void SendWeekType(long chatId)
+        private static async Task SendWeekType(long chatId)
         {
             int x = (new DateTime(2021, 3, 26) - new DateTime()).Days / 7;
             string result = x % 2 == 0 ? "Числитель" : "Знаменатель";
             await Client.SendTextMessageAsync(chatId, result);
         }
         
-        private static async void SendReplacements(long chatId)
+        private static async Task SendReplacements(long chatId)
         {
-            try
-            {
-                await Client.SendTextMessageAsync(chatId, "Погодь...");
-                await Client.SendTextMessageAsync(chatId, await SharagaReplacement.GetReplacementsString("https://cutt.ly/3vA4E5x"));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            await Client.SendTextMessageAsync(chatId, "Погодь...");
+            await Client.SendTextMessageAsync(chatId, await SharagaReplacement.GetReplacementsString("https://cutt.ly/3vA4E5x"));
         }
 
         private static ReplyKeyboardMarkup GetButtons()
@@ -63,8 +64,8 @@ namespace SharagaReplacementsBot
                 {
                     new()
                     {
-                        new KeyboardButton { Text = "Замены" },
-                        new KeyboardButton { Text = "Тип недели" },
+                        new KeyboardButton("Замены"),
+                        new KeyboardButton ("Тип недели"),
                     }
                 }
             };
